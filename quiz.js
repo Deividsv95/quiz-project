@@ -61,13 +61,21 @@ function showScorePopup(score) {
     const ok = overlay.querySelector('#modal-ok');
     if (ok) ok.focus();
     if (ok) ok.onclick = () => hideModal(overlay);
-    // update in-page score element as well
+    // hide the in-page score element when showing the popup
     const out = document.getElementById('score');
-    if (out) out.textContent = 'Score: ' + score + '/5';
+    if (out) {
+        out.style.display = 'none';
+    }
 }
 
 function hideModal(overlay) {
     overlay.classList.remove('active');
+    // clear and restore the in-page score element when modal closes
+    const out = document.getElementById('score');
+    if (out) {
+        out.textContent = '';
+        out.style.display = '';
+    }
 }
 
 function updateScore() {
