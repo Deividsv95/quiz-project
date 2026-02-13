@@ -2,6 +2,8 @@ console.log("quiz take 2 loaded");
 document.addEventListener('DOMContentLoaded', function() {
     shuffleQuestions();
     setupSubmit();
+    setupReset();
+    setupHowToPlay();
 });
 
 function shuffleQuestions() {
@@ -65,4 +67,34 @@ function showScorePopup(score) {
 
 function hideModal(overlay) {
     overlay.classList.remove('active');
+}
+
+function setupReset() {
+    const reset = document.getElementById('reset');
+    if (!reset) return;
+    reset.addEventListener('click', function() {
+        location.reload();
+    });
+}
+
+function setupHowToPlay() {
+    const btn = document.getElementById('how-to-play-btn');
+    const modal = document.getElementById('how-to-play-modal');
+    const closeBtn = document.getElementById('close-how-to-play');
+    
+    if (!btn || !modal) return;
+    
+    btn.addEventListener('click', () => {
+        modal.classList.add('active');
+    });
+    
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
 }

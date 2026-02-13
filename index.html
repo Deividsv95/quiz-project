@@ -6,11 +6,12 @@
 </head>
 <body>
     <header>
-        <h1>Quiz project</h1>   
+        <h1>Quiz project</h1>
+        <button type="button" id="how-to-play-btn">How to Play</button>
     </header>
     <form>
         <div class="question">
-            Q1: What is 2 + 2?<br>
+            What is 2 + 2?<br>
             <br>
             <input type="radio" name="q1" value="3">3<br>
             <input type="radio" name="q1" value="4" id="q1">4<br>
@@ -19,7 +20,7 @@
         </div>
 
         <div class="question">
-            Q2: What is the capital of France?<br>
+            What is the capital of France?<br>
             <br>
             <input type="radio" name="q2" value="Berlin">Berlin<br>
             <input type="radio" name="q2" value="Madrid">Madrid<br>
@@ -28,7 +29,7 @@
         </div>
 
         <div class="question">
-            Q3: Which planet is known as the Red Planet?<br>
+            Which planet is known as the Red Planet?<br>
             <br>
             <input type="radio" name="q3" value="Earth">Earth<br>
             <input type="radio" name="q3" value="Mars" id="q3">Mars<br>
@@ -37,7 +38,7 @@
         </div>
 
         <div class="question">
-            Q4: What is the largest ocean on Earth?<br>
+            What is the largest ocean on Earth?<br>
             <br>
             <input type="radio" name="q4" value="Atlantic Ocean">Atlantic Ocean<br>
             <input type="radio" name="q4" value="Indian Ocean">Indian Ocean<br>
@@ -46,7 +47,7 @@
         </div>
 
         <div class="question">
-            Q5: Who wrote 'Romeo and Juliet'?<br>
+            Who wrote 'Romeo and Juliet'?<br>
             <br>
             <input type="radio" name="q5" value="Charles Dickens">Charles Dickens<br>
             <input type="radio" name="q5" value="William Shakespeare" id="q5">William Shakespeare<br>
@@ -58,6 +59,68 @@
 
     <div class="submit-container">
         <button type="button" id="submit">Submit</button>
+        <button type="button" id="reset">Reset</button>
+    </div>
+
+    <div id="how-to-play-modal" class="how-to-play-modal">
+        <div class="how-to-play-content">
+            <button type="button" class="close-btn" id="close-how-to-play">&times;</button>
+            <h2>How to Play</h2>
+            <p class="subtitle">Master the quiz in just a few simple steps!</p>
+
+            <div class="section">
+                <h3 class="section-title">Getting Started</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Read Each Question</h4>
+                            <p>Take your time to carefully read each question. Every quiz contains multiple questions covering various topics.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Select Your Answer</h4>
+                            <p>Select the answer you think is correct. You can only choose one answer per question.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Review Your Selections</h4>
+                            <p>Before submitting, scroll through and make sure you've answered all questions and are satisfied with your choices.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Submit Your Quiz</h4>
+                            <p>Click the "Submit" button at the bottom of the page when you're ready to see your results.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>View Your Score</h4>
+                            <p>Your score will be calculated instantly, showing you how many questions you answered correctly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips">
+                <h4>💡 Pro Tips</h4>
+                <ul>
+                    <li>Read each question thoroughly before selecting your answer</li>
+                    <li>Trust your first instinct if you're unsure</li>
+                    <li>Make sure to answer every question before submitting</li>
+                    <li>Take your time - there's no timer rushing you</li>
+                    <li>You can change your answers before clicking Submit</li>
+                    <li>Learn from incorrect answers to improve next time</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script src="quiz.js"></script>
