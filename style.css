@@ -11,17 +11,18 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #333;
-    color: white;
+    background-color: #0b1220; /* deep navy */
+    color: #f8fafc;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 18px rgba(11,18,32,0.35);
     z-index: 1000;
 }
 
 body {
     font-family: 'Oswald', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Softer, modern gradient */
+    background: linear-gradient(135deg, #e6f7ff 0%, #eef2ff 50%, #f8f6ff 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -29,35 +30,43 @@ body {
     padding: 20px;
     padding-top: 80px;
     padding-bottom: 140px; /* space for fixed submit button */
+    color: #0f172a;
 }
 
 form {
-    background: white;
+    background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+    max-width: 560px;
     width: 100%;
+    border: 1px solid rgba(15,23,42,0.04);
 }
 
 form label, form div {
     display: block;
     margin: auto;
-    width: 50% ;
-    border: #333 2px solid;
+    width: 100%;
+    border: none;
     border-radius: 8px;
-    padding: 10px;
-    display: block;
-    margin-bottom: 20px;
+    padding: 10px 6px;
+    margin-bottom: 18px;
     font-size: 16px;
-    color: #333;
+    color: #0f172a;
+}
+.question {
+    background: linear-gradient(180deg, rgba(124,58,237,0.03), rgba(6,182,212,0.02));
+    border-radius: 8px;
+    padding: 14px 12px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(15,23,42,0.04);
 }
 div {
     text-align: center;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 15px;
-    color: #09123e;
+    color: #0f172a;
 }
 
 input[type="radio"] {
@@ -70,32 +79,34 @@ input[type="radio"] + text {
 }
 
 button {
-    background-color: #667eea;
+    background: linear-gradient(90deg,#7c3aed 0%, #06b6d4 100%);
     color: white;
-    padding: 12px 30px;
+    padding: 12px 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    margin-top: 4px;
+    box-shadow: 0 8px 20px rgba(99,102,241,0.12);
 }
 
 button:hover {
-    background-color: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(99,102,241,0.14);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: translateY(0);
 }
 
 #score {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 18px;
     font-size: 18px;
-    font-weight: bold;
-    color: #667eea;
+    font-weight: 700;
+    color: #6b21a8; /* deep accent */
 }
 
 header {
@@ -119,24 +130,24 @@ header {
 }
 
 .modal {
-    background: #fff;
+    background: linear-gradient(180deg,#ffffff,#fbfdff);
     padding: 20px 24px;
-    border-radius: 10px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    border-radius: 12px;
+    box-shadow: 0 18px 48px rgba(15,23,42,0.12);
     max-width: 90%;
-    width: 360px;
+    width: 380px;
     text-align: center;
 }
 
 .modal h2 {
     margin-bottom: 8px;
-    color: #222;
+    color: #0b1220;
 }
 
 .modal p {
     margin-bottom: 16px;
     font-size: 18px;
-    color: #444;
+    color: #334155;
 }
 
 .modal .modal-actions {
@@ -153,7 +164,7 @@ header {
 }
 
 .modal .btn.primary {
-    background: #667eea;
+    background: linear-gradient(90deg,#7c3aed 0%, #06b6d4 100%);
     color: white;
 }
 
