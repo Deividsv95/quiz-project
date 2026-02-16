@@ -1,80 +1,146 @@
 console.log("quiz take 2 loaded");
-document.addEventListener('DOMContentLoaded', function() {
-    shuffleQuestions();
+
+const questionPool = [
+    { question: "What is 2 + 2?", options: ["3", "4", "5"], correctIndex: 1 },
+    { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris"], correctIndex: 2 },
+    { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Jupiter"], correctIndex: 1 },
+    { question: "What is the largest ocean on Earth?", options: ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean"], correctIndex: 2 },
+    { question: "Who wrote 'Romeo and Juliet'?", options: ["Charles Dickens", "William Shakespeare", "Mark Twain"], correctIndex: 1 },
+    { question: "What is the capital of Japan?", options: ["Seoul", "Tokyo", "Beijing"], correctIndex: 1 },
+    { question: "Which element has the atomic number 1?", options: ["Helium", "Hydrogen", "Oxygen"], correctIndex: 1 },
+    { question: "What is the smallest prime number?", options: ["0", "1", "2"], correctIndex: 2 },
+    { question: "Who painted the Mona Lisa?", options: ["Michelangelo", "Leonardo da Vinci", "Raphael"], correctIndex: 1 },
+    { question: "What is the currency of the UK?", options: ["Euro", "Pound Sterling", "Dollar"], correctIndex: 1 }
+];
+
+let correctAnswers = {};
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadQuestions();
     setupSubmit();
     setupReset();
     setupHowToPlay();
+    setupFormValidation();
 });
+
+function loadQuestions() {
+    const form = document.querySelector('form');
+    const questionsContainers = form.querySelectorAll('.question');
+    
+    const selectedQuestions = shuffleArray([...questionPool]).slice(0, 5);
+    correctAnswers = {};
+    
+    questionsContainers.forEach((container, index) => {
+        if (index < selectedQuestions.length) {
+            const q = selectedQuestions[index];
+            const questionDiv = container.querySelector('div');
+            questionDiv.textContent = q.question;
+            
+            const qName = `q${index + 1}`;
+            correctAnswers[qName] = q.correctIndex;
+            
+            const radioInputs = container.querySelectorAll('input[type="radio"]');
+            const spans = container.querySelectorAll('span');
+            
+            radioInputs.forEach((input, optIndex) => {
+                input.value = q.options[optIndex];
+                input.id = qName;
+                input.name = qName;
+                input.dataset.optionIndex = optIndex;
+                if (spans[optIndex]) {
+                    spans[optIndex].textContent = q.options[optIndex];
+                }
+            });
+        }
+    });
+    
+    shuffleQuestions();
+}
+
+// Fisher-Yates shuffle algorithm with descriptive variable names
+function shuffleArray(array) {
+    const result = [...array];
+    for (let currentIndex = result.length - 1; currentIndex > 0; currentIndex--) {
+        const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+        [result[currentIndex], result[randomIndex]] = [result[randomIndex], result[currentIndex]];
+    }
+    return result;
+}
 
 function shuffleQuestions() {
     const questions = Array.from(document.querySelectorAll('.question'));
-    const parent = questions[0]?.parentNode;
-    if (!parent || questions.length < 2) return;
+    if (questions.length < 2) return;
     
-    for (let i = questions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
+    const shuffled = shuffleArray(questions);
+    const parent = questions[0].parentNode;
+    shuffled.forEach(q => parent.appendChild(q));
+}
+
+function setupFormValidation() {
+    const form = document.querySelector('form');
+    const submitBtn = document.getElementById('submit');
     
-    questions.forEach(q => parent.appendChild(q));
+    const validateForm = () => {
+        const allAnswered = [...form.querySelectorAll('input[type="radio"]')]
+            .reduce((acc, input) => {
+                const questionName = input.name;
+                return acc && form.querySelector(`input[name="${questionName}"]:checked`) !== null;
+            }, true);
+        
+        submitBtn.disabled = !allAnswered;
+    };
+    
+    form.addEventListener('change', validateForm);
+    validateForm(); // Check initial state
 }
 
 function setupSubmit() {
     const submit = document.getElementById('submit');
     if (!submit) return;
-    submit.addEventListener('click', function() {
-        var score = 0;
-        // Check q1..q5 safely (guards against missing elements)
+    submit.addEventListener('click', () => {
+        let score = 0;
+        
         for (let i = 1; i <= 5; i++) {
-            const el = document.getElementById('q' + i);
-            if (el && el.checked) score++;
+            const qName = `q${i}`;
+            const checkedRadio = document.querySelector(`input[name="${qName}"]:checked`);
+            
+            if (checkedRadio && correctAnswers[qName] !== undefined) {
+                const selectedIndex = parseInt(checkedRadio.dataset.optionIndex);
+                if (selectedIndex === correctAnswers[qName]) {
+                    score++;
+                }
+            }
         }
+        
         showScorePopup(score);
     });
 }
 
-// Create and show a modal popup with the score
 function showScorePopup(score) {
-    let overlay = document.querySelector('.modal-overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.className = 'modal-overlay';
-        overlay.innerHTML = `
-            <div class="modal" role="dialog" aria-modal="true">
-                <h2>Your Result</h2>
-                <p id="modal-score">Score: ${score}/5</p>
-                <div class="modal-actions">
-                    <button class="btn primary" id="modal-ok">OK</button>
-                </div>
-            </div>`;
-        document.body.appendChild(overlay);
-        // ensure the score text is set (handle any template timing issues)
-        const createdScoreEl = overlay.querySelector('#modal-score');
-        if (createdScoreEl) createdScoreEl.textContent = `Score: ${score}/5`;
-        // close handler
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) hideModal(overlay);
-        });
-    } else {
-        const scoreEl = overlay.querySelector('#modal-score');
-        if (scoreEl) scoreEl.textContent = `Score: ${score}/5`;
-    }
-    overlay.classList.add('active');
+    const overlay = document.getElementById('score-modal');
+    const scoreEl = overlay.querySelector('#modal-score');
     const ok = overlay.querySelector('#modal-ok');
-    if (ok) ok.focus();
-    if (ok) ok.onclick = () => hideModal(overlay);
+    
+    scoreEl.textContent = `Score: ${score}/5`;
+    overlay.style.display = 'flex';
+    overlay.classList.add('active');
+    ok.focus();
+    
+    ok.onclick = () => hideModal(overlay);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) hideModal(overlay);
+    });
 }
 
 function hideModal(overlay) {
+    overlay.style.display = 'none';
     overlay.classList.remove('active');
 }
 
 function setupReset() {
     const reset = document.getElementById('reset');
     if (!reset) return;
-    reset.addEventListener('click', function() {
-        location.reload();
-    });
+    reset.addEventListener('click', () => location.reload());
 }
 
 function setupHowToPlay() {
@@ -84,17 +150,11 @@ function setupHowToPlay() {
     
     if (!btn || !modal) return;
     
-    btn.addEventListener('click', () => {
-        modal.classList.add('active');
-    });
+    const toggleModal = (show) => modal.classList.toggle('active', show);
     
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-    
+    btn.addEventListener('click', () => toggleModal(true));
+    closeBtn?.addEventListener('click', () => toggleModal(false));
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
+        if (e.target === modal) toggleModal(false);
     });
 }
