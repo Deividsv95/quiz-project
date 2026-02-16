@@ -42,13 +42,17 @@ header {
     background-color: var(--dark-navy);
     color: var(--light-bg);
     padding: 20px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     box-shadow: 0 4px 18px rgba(11, 18, 32, 0.35);
     z-index: 1000;
 }
 
 header h1 {
     font-size: 2em;
+    margin: 0;
 }
 
 form, .container {
@@ -271,7 +275,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 .submit-container { position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; width: calc(100% - 40px); max-width: 520px; z-index: 1800; display: flex; gap: 10px; }
 .submit-container button { flex: 1; }
 
-#how-to-play-btn { background: none; border: none; color: var(--light-bg); cursor: pointer; font-size: 14px; text-decoration: underline; padding: 0; margin-left: 20px; transition: opacity 0.3s ease; }
+#how-to-play-btn { background: none; border: none; color: var(--light-bg); cursor: pointer; font-size: 14px; text-decoration: underline; padding: 0; transition: opacity 0.3s ease; }
 #how-to-play-btn:hover { opacity: 0.8; }
 
 .how-to-play-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 20px; }
@@ -306,7 +310,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 @media (max-width: 480px) {
     header { padding: 12px; }
     header h1 { font-size: 1.2em; }
-    #how-to-play-btn { margin-left: 10px; font-size: 12px; }
+    #how-to-play-btn { font-size: 12px; }
     body { padding-top: 65px; padding-bottom: 170px; }
     form, .container { padding: 15px; margin: 0 5px; }
     .container h1 { font-size: 1.5em; }
