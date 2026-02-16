@@ -1,18 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --gradient: linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%);
+    --shadow: 0 8px 20px rgba(99,102,241,0.12);
+    --navy: #0b1220;
+    --light: #f8fafc;
+    --dark: #0f172a;
+    --gray: #666;
+    --radius: 12px;
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background-color: #0b1220; /* deep navy */
-    color: #f8fafc;
+    background: var(--navy);
+    color: var(--light);
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 18px rgba(11,18,32,0.35);
@@ -21,7 +27,6 @@ header {
 
 body {
     font-family: 'Oswald', sans-serif;
-    /* Softer, modern gradient */
     background: linear-gradient(135deg, #e6f7ff 0%, #eef2ff 50%, #f8f6ff 100%);
     min-height: 100vh;
     display: flex;
@@ -29,34 +34,32 @@ body {
     align-items: center;
     padding: 20px;
     padding-top: 80px;
-    padding-bottom: 140px; /* space for fixed submit button */
-    color: #0f172a;
+    padding-bottom: 140px;
+    color: var(--dark);
 }
 
 form {
-    background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
     padding: 40px;
-    border-radius: 12px;
+    border-radius: var(--radius);
     box-shadow: 0 12px 30px rgba(16,24,40,0.08);
     max-width: 560px;
     width: 100%;
     border: 1px solid rgba(15,23,42,0.04);
 }
 
+form label, form div, .question { display: block; width: 100%; border-radius: 8px; }
+
 form label, form div {
-    display: block;
     margin: auto;
-    width: 100%;
-    border-radius: 8px;
     padding: 10px 6px;
     margin-bottom: 18px;
     font-size: 16px;
-    color: #0f172a;
+    color: var(--dark);
 }
 
 .question {
     background: linear-gradient(180deg, rgba(124,58,237,0.03), rgba(6,182,212,0.02));
-    border-radius: 8px;
     padding: 14px 12px;
     margin-bottom: 14px;
     border: 1px solid rgba(15,23,42,0.04);
@@ -67,284 +70,135 @@ div {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #0f172a;
+    color: var(--dark);
 }
 
-input[type="radio"] {
-    margin-right: 8px;
-    cursor: pointer;
-}
+input[type="radio"] { margin-right: 8px; cursor: pointer; }
 
 button {
-    background: linear-gradient(90deg,#7c3aed 0%, #06b6d4 100%);
+    background: var(--gradient);
     color: white;
     padding: 12px 18px;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius);
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
     margin-top: 4px;
-    box-shadow: 0 8px 20px rgba(99,102,241,0.12);
+    box-shadow: var(--shadow);
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(99,102,241,0.14);
+button:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(99,102,241,0.14); }
+button:active { transform: translateY(0); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+#score { text-align: center; margin-top: 18px; font-size: 18px; font-weight: 700; color: #6b21a8; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 2000; }
+.modal-overlay.active { display: flex; }
+
+.modal { background: linear-gradient(180deg, #ffffff, #fbfdff); padding: 20px 24px; border-radius: var(--radius); box-shadow: 0 18px 48px rgba(15,23,42,0.12); max-width: 90%; width: 380px; text-align: center; }
+
+.modal h2 { margin-bottom: 8px; color: var(--navy); }
+.modal p { margin-bottom: 16px; font-size: 18px; color: #334155; }
+.modal .modal-actions { display: flex; gap: 10px; justify-content: center; }
+
+.modal .btn { padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; }
+.modal .btn.primary { background: var(--gradient); color: white; }
+.modal .btn.ghost { background: transparent; border: 1px solid #ccc; color: #333; box-shadow: none; }
+
+.submit-container { position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; width: calc(100% - 40px); max-width: 520px; z-index: 1800; }
+
+#how-to-play-btn { background: none; border: none; color: var(--light); cursor: pointer; font-size: 14px; text-decoration: underline; padding: 0; transition: opacity 0.3s ease; }
+#how-to-play-btn:hover { opacity: 0.8; }
+
+.how-to-play-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 20px; }
+.how-to-play-modal.active { display: flex; }
+
+.how-to-play-content { background: white; border-radius: var(--radius); padding: 40px; max-width: 700px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+
+.close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--gray); padding: 0; width: 30px; height: 30px; transition: color 0.2s; }
+.close-btn:hover { color: #000; }
+
+.how-to-play-content h2 { color: var(--navy); font-size: 2em; margin-bottom: 10px; text-align: center; }
+.how-to-play-content .subtitle { text-align: center; color: var(--gray); margin-bottom: 30px; }
+.how-to-play-content .section { margin-bottom: 40px; }
+.how-to-play-content .section-title { color: var(--navy); font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid #7c3aed; }
+.how-to-play-content .steps { display: grid; gap: 15px; }
+.how-to-play-content .step { display: flex; align-items: flex-start; gap: 15px; padding: 15px; background: #f5f7fa; border-radius: 8px; }
+.how-to-play-content .step:hover { background: #eef2ff; }
+.how-to-play-content .step-number { flex-shrink: 0; width: 40px; height: 40px; background: var(--gradient); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+.how-to-play-content .step-content h4 { color: var(--navy); font-size: 1.1em; margin-bottom: 5px; }
+.how-to-play-content .step-content p { color: var(--gray); font-size: 0.95em; line-height: 1.5; }
+.how-to-play-content .tips { background: #fff5e6; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9800; }
+.how-to-play-content .tips h4 { color: #ff9800; font-size: 1.2em; margin-bottom: 15px; }
+.how-to-play-content .tips ul { list-style: none; padding: 0; }
+.how-to-play-content .tips li { color: var(--gray); line-height: 1.8; margin-bottom: 8px; padding-left: 25px; position: relative; }
+.how-to-play-content .tips li:before { content: "✓"; color: #ff9800; font-weight: bold; position: absolute; left: 0; }
+
+@media (max-width: 768px) {
+    header { padding: 15px; gap: 8px; }
+    body { padding-top: 70px; padding-bottom: 160px; }
+    form, .how-to-play-content { padding: 25px; margin: 0 10px; }
+    .question { padding: 12px 10px; margin-bottom: 12px; }
+    div { font-size: 16px; margin-bottom: 12px; }
+    button { padding: 11px 16px; font-size: 15px; }
+    .modal { max-width: 85%; padding: 18px 20px; }
+    .modal h2 { font-size: 1.3em; }
+    .submit-container { width: calc(100% - 20px); bottom: 15px; flex-direction: column; gap: 8px; }
+    .how-to-play-content h2 { font-size: 1.6em; }
+    .how-to-play-content .subtitle { font-size: 0.95em; margin-bottom: 25px; }
+    .how-to-play-content .section-title { font-size: 1.3em; margin-bottom: 18px; }
+    .how-to-play-content .step { gap: 12px; padding: 12px; }
+    .how-to-play-content .step-number { width: 38px; height: 38px; }
+    .how-to-play-content .tips { padding: 18px; }
 }
 
-button:active {
-    transform: translateY(0);
+@media (max-width: 480px) {
+    header { padding: 12px; gap: 6px; }
+    body { padding-top: 60px; padding-bottom: 150px; padding: 20px 10px; }
+    form, .how-to-play-content { padding: 15px; }
+    form { max-width: 100%; border-radius: 10px; }
+    form label, form div { padding: 8px 5px; margin-bottom: 12px; }
+    .question { padding: 10px 8px; margin-bottom: 10px; border-radius: 6px; }
+    div { font-size: 15px; margin-bottom: 10px; }
+    input[type="radio"] { margin-right: 6px; }
+    button { padding: 10px 14px; font-size: 14px; border-radius: 8px; }
+    button:hover { transform: translateY(-1px); }
+    .modal-overlay { padding: 10px; }
+    .modal { width: 90%; padding: 14px 16px; border-radius: 10px; }
+    .modal h2 { font-size: 1.1em; margin-bottom: 6px; }
+    .modal p { font-size: 15px; margin-bottom: 12px; }
+    .modal .btn { padding: 7px 12px; font-size: 14px; }
+    .submit-container { width: calc(100% - 10px); bottom: 10px; flex-direction: column; gap: 6px; }
+    #how-to-play-btn { font-size: 13px; }
+    .how-to-play-modal { padding: 10px; }
+    .how-to-play-content { max-width: 100%; max-height: 95vh; padding: 20px; border-radius: 10px; }
+    .close-btn { width: 28px; height: 28px; font-size: 24px; top: 10px; right: 10px; }
+    .how-to-play-content h2 { font-size: 1.4em; margin-bottom: 8px; }
+    .how-to-play-content .subtitle { font-size: 0.9em; margin-bottom: 20px; }
+    .how-to-play-content .section { margin-bottom: 25px; }
+    .how-to-play-content .section-title { font-size: 1.15em; margin-bottom: 15px; padding-bottom: 8px; }
+    .how-to-play-content .step { gap: 10px; padding: 10px; border-radius: 6px; }
+    .how-to-play-content .step-number { width: 35px; height: 35px; font-size: 1em; }
+    .how-to-play-content .step-content h4 { font-size: 0.95em; margin-bottom: 4px; }
+    .how-to-play-content .step-content p { font-size: 0.85em; line-height: 1.4; }
+    .how-to-play-content .tips { padding: 15px; border-left: 3px solid #ff9800; }
+    .how-to-play-content .tips h4 { font-size: 1.05em; margin-bottom: 12px; }
+    .how-to-play-content .tips li { font-size: 0.85em; line-height: 1.6; margin-bottom: 6px; padding-left: 22px; }
 }
 
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-#score {
-    text-align: center;
-    margin-top: 18px;
-    font-size: 18px;
-    font-weight: 700;
-    color: #6b21a8; /* deep accent */
-}
-
-/* Modal / popup for displaying score */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-}
-
-.modal-overlay.active {
-    display: flex;
-}
-
-.modal {
-    background: linear-gradient(180deg,#ffffff,#fbfdff);
-    padding: 20px 24px;
-    border-radius: 12px;
-    box-shadow: 0 18px 48px rgba(15,23,42,0.12);
-    max-width: 90%;
-    width: 380px;
-    text-align: center;
-}
-
-.modal h2 {
-    margin-bottom: 8px;
-    color: #0b1220;
-}
-
-.modal p {
-    margin-bottom: 16px;
-    font-size: 18px;
-    color: #334155;
-}
-
-.modal .modal-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.modal .btn {
-    padding: 8px 14px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-}
-
-.modal .btn.primary {
-    background: linear-gradient(90deg,#7c3aed 0%, #06b6d4 100%);
-    color: white;
-}
-
-.modal .btn.ghost {
-    background: transparent;
-    border: 1px solid #ccc;
-    color: #333;
-    box-shadow: none;
-}
-
-/* Fixed submit button container at bottom */
-.submit-container {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 20px;
-    width: calc(100% - 40px);
-    max-width: 520px;
-    z-index: 1800;
-}
-
-#how-to-play-btn {
-    background: none;
-    border: none;
-    color: #f8fafc;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: underline;
-    padding: 0;
-    margin-left: 20px;
-    transition: opacity 0.3s ease;
-}
-
-#how-to-play-btn:hover {
-    opacity: 0.8;
-}
-
-/* How to Play Modal */
-.how-to-play-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 3000;
-    padding: 20px;
-}
-
-.how-to-play-modal.active {
-    display: flex;
-}
-
-.how-to-play-content {
-    background: white;
-    border-radius: 12px;
-    padding: 40px;
-    max-width: 700px;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-}
-
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: #666;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    transition: color 0.2s ease;
-}
-
-.close-btn:hover {
-    color: #000;
-}
-
-.how-to-play-content h2 {
-    color: #0b1220;
-    font-size: 2em;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.how-to-play-content .subtitle {
-    text-align: center;
-    color: #666;
-    font-size: 1em;
-    margin-bottom: 30px;
-}
-
-.how-to-play-content .section {
-    margin-bottom: 40px;
-}
-
-.how-to-play-content .section-title {
-    color: #0b1220;
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 3px solid #7c3aed;
-}
-
-.how-to-play-content .steps {
-    display: grid;
-    gap: 15px;
-}
-
-.how-to-play-content .step {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 15px;
-    background: #f5f7fa;
-    border-radius: 8px;
-}
-
-.how-to-play-content .step:hover {
-    background: #eef2ff;
-}
-
-.how-to-play-content .step-number {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.how-to-play-content .step-content h4 {
-    color: #0b1220;
-    font-size: 1.1em;
-    margin-bottom: 5px;
-}
-
-.how-to-play-content .step-content p {
-    color: #666;
-    font-size: 0.95em;
-    line-height: 1.5;
-}
-
-.how-to-play-content .tips {
-    background: #fff5e6;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #ff9800;
-}
-
-.how-to-play-content .tips h4 {
-    color: #ff9800;
-    font-size: 1.2em;
-    margin-bottom: 15px;
-}
-
-.how-to-play-content .tips ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.how-to-play-content .tips li {
-    color: #666;
-    line-height: 1.8;
-    margin-bottom: 8px;
-    padding-left: 25px;
-    position: relative;
-}
-
-.how-to-play-content .tips li:before {
-    content: "✓";
-    color: #ff9800;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
+@media (max-width: 375px) {
+    header { padding: 10px; }
+    body { padding-top: 55px; padding-bottom: 140px; }
+    form, .how-to-play-content { padding: 12px; }
+    div { font-size: 14px; }
+    button { padding: 8px 12px; font-size: 13px; }
+    .modal { width: 95%; padding: 12px 14px; }
+    .modal h2 { font-size: 1em; }
+    .modal p { font-size: 14px; }
+    .how-to-play-content h2 { font-size: 1.2em; }
+    .how-to-play-content .section-title { font-size: 1em; }
+    .how-to-play-content .step-number { width: 32px; height: 32px; font-size: 0.9em; }
 }

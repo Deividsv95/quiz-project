@@ -287,8 +287,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 .close-btn:hover { color: #000; }
 
 @media (max-width: 768px) {
-    header { padding: 15px; }
-    header h1 { font-size: 1.5em; }
+    header { padding: 15px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    header h1 { font-size: 1.5em; margin: 0; }
     body { padding-top: 80px; padding-bottom: 180px; }
     form, .container { padding: 20px; max-width: 100%; margin: 0 10px; }
     .container h1 { font-size: 1.8em; }
@@ -305,27 +305,68 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     button { padding: 10px 14px; font-size: 14px; }
     .submit-container { width: calc(100% - 20px); max-width: 100%; bottom: 10px; flex-direction: column; gap: 8px; }
     .modal { width: 90%; max-width: 100%; padding: 16px; }
+    .how-to-play-content { max-width: 95%; padding: 20px; }
+    .how-to-play-content h2 { font-size: 1.6em; }
+    .close-btn { width: 28px; height: 28px; font-size: 24px; }
 }
 
 @media (max-width: 480px) {
-    header { padding: 12px; }
-    header h1 { font-size: 1.2em; }
+    header { padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    header h1 { font-size: 1.2em; margin: 0; }
     #how-to-play-btn { font-size: 12px; }
-    body { padding-top: 65px; padding-bottom: 170px; }
-    form, .container { padding: 15px; margin: 0 5px; }
+    body { padding-top: 65px; padding-bottom: 170px; padding-left: 8px; padding-right: 8px; }
+    form, .container { padding: 15px; margin: 0 5px; border-radius: 10px; }
     .container h1 { font-size: 1.5em; }
+    .container .subtitle { font-size: 0.95em; }
     .container .section-title { font-size: 1.1em; margin-bottom: 18px; }
-    .container .step { gap: 10px; padding: 12px; }
+    .container .step { gap: 10px; padding: 12px; border-radius: 6px; }
     .container .step-number { width: 35px; height: 35px; font-size: 0.95em; }
     .container .step-content h4 { font-size: 0.95em; }
     .container .step-content p, .container .tips li { font-size: 0.85em; }
-    .container .tips { padding: 15px; }
+    .container .tips { padding: 15px; border-left: 3px solid #ff9800; }
     .container .tips h4 { font-size: 1.1em; }
     .container .btn { padding: 8px 16px; font-size: 13px; }
     .question, div { padding: 10px; margin-bottom: 10px; font-size: 14px; }
-    button { padding: 8px 12px; font-size: 13px; }
+    input[type="radio"] { margin-right: 5px; }
+    button { padding: 8px 12px; font-size: 13px; border-radius: 8px; }
+    button:hover { transform: translateY(-1px); }
     .submit-container { width: calc(100% - 10px); bottom: 5px; }
-    .modal { width: 95%; padding: 14px; }
-    .modal h2 { font-size: 1.2em; }
-    .modal p { font-size: 16px; }
+    .modal-overlay { padding: 10px; }
+    .modal { width: 95%; padding: 14px; border-radius: 10px; }
+    .modal h2 { font-size: 1.1em; }
+    .modal p { font-size: 15px; }
+    .modal .btn { padding: 7px 12px; font-size: 13px; }
+    .how-to-play-modal { padding: 10px; }
+    .how-to-play-content { max-width: 100%; max-height: 95vh; padding: 16px; border-radius: 10px; }
+    .how-to-play-content h2 { font-size: 1.4em; margin-bottom: 8px; }
+    .how-to-play-content .subtitle { font-size: 0.9em; margin-bottom: 20px; }
+    .close-btn { width: 26px; height: 26px; font-size: 22px; top: 12px; right: 12px; }
+}
+
+@media (max-width: 375px) {
+    header { padding: 10px; }
+    header h1 { font-size: 1.1em; }
+    body { padding-top: 55px; padding-bottom: 155px; }
+    form, .container { padding: 12px; margin: 0 2px; }
+    form { max-width: 100%; }
+    .container h1 { font-size: 1.3em; }
+    .container .subtitle { font-size: 0.9em; }
+    .container .section-title { font-size: 1em; }
+    .container .step { gap: 8px; padding: 10px; }
+    .container .step-number { width: 32px; height: 32px; font-size: 0.9em; }
+    .container .step-content h4 { font-size: 0.9em; }
+    .container .step-content p { font-size: 0.8em; }
+    .container .tips { padding: 12px; }
+    .container .tips h4 { font-size: 1em; }
+    .container .tips li { font-size: 0.8em; }
+    .container .btn { padding: 7px 14px; font-size: 12px; }
+    .question, div { padding: 8px; margin-bottom: 8px; font-size: 13px; }
+    button { padding: 7px 10px; font-size: 12px; }
+    .submit-container { width: calc(100% - 6px); bottom: 3px; }
+    .modal { width: 96%; padding: 12px; }
+    .modal h2 { font-size: 1em; }
+    .modal p { font-size: 13px; }
+    .how-to-play-content { max-width: 100%; padding: 14px; }
+    .how-to-play-content h2 { font-size: 1.2em; }
+    .close-btn { width: 24px; height: 24px; font-size: 20px; }
 }
