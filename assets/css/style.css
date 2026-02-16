@@ -225,11 +225,34 @@ form label, form div, .question {
     background: linear-gradient(180deg, rgba(124,58,237,0.03), rgba(6,182,212,0.02));
     padding: 14px 12px;
     border: 1px solid rgba(15,23,42,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 div { text-align: center; font-size: 18px; font-weight: 700; color: var(--text-dark); }
 
-input[type="radio"] { margin-right: 8px; cursor: pointer; }
+input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+    margin-bottom: 3px;
+    vertical-align: middle;
+}
+
+.question span {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: center;
+}
 
 button {
     background: var(--primary-gradient);
@@ -300,8 +323,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .container .step-content p, .container .tips li { font-size: 0.9em; }
     .container .tips { padding: 18px; }
     .container .btn { padding: 10px 20px; font-size: 14px; }
-    .question, div { padding: 12px; margin-bottom: 12px; font-size: 16px; }
-    input[type="radio"] { margin-right: 6px; }
+    .question, div { padding: 12px; margin-bottom: 12px; font-size: 16px; text-align: center; }
+    input[type="radio"] { margin-right: 8px; margin-bottom: 2px; }
+    .option { margin-bottom: 8px; font-size: 15px; justify-content: center; }
     button { padding: 10px 14px; font-size: 14px; }
     .submit-container { width: calc(100% - 20px); max-width: 100%; bottom: 10px; flex-direction: column; gap: 8px; }
     .modal { width: 90%; max-width: 100%; padding: 16px; }
@@ -326,8 +350,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .container .tips { padding: 15px; border-left: 3px solid #ff9800; }
     .container .tips h4 { font-size: 1.1em; }
     .container .btn { padding: 8px 16px; font-size: 13px; }
-    .question, div { padding: 10px; margin-bottom: 10px; font-size: 14px; }
+    .question, div { padding: 10px; margin-bottom: 10px; font-size: 14px; text-align: center; }
     input[type="radio"] { margin-right: 5px; }
+    .option { margin-bottom: 6px; font-size: 14px; justify-content: center; }
     button { padding: 8px 12px; font-size: 13px; border-radius: 8px; }
     button:hover { transform: translateY(-1px); }
     .submit-container { width: calc(100% - 10px); bottom: 5px; }
@@ -360,7 +385,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .container .tips h4 { font-size: 1em; }
     .container .tips li { font-size: 0.8em; }
     .container .btn { padding: 7px 14px; font-size: 12px; }
-    .question, div { padding: 8px; margin-bottom: 8px; font-size: 13px; }
+    .question, div { padding: 8px; margin-bottom: 8px; font-size: 13px; text-align: center; }
+    input[type="radio"] { margin-right: 4px; }
+    .option { margin-bottom: 5px; font-size: 13px; justify-content: center; }
     button { padding: 7px 10px; font-size: 12px; }
     .submit-container { width: calc(100% - 6px); bottom: 3px; }
     .modal { width: 96%; padding: 12px; }
