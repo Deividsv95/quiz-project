@@ -1,6 +1,6 @@
 console.log("quiz take 2 loaded");
 
-const questionPool = [
+const quizQuestions = [
     { question: "What is 2 + 2?", options: ["3", "4", "5"], correctIndex: 1 },
     { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris"], correctIndex: 2 },
     { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Jupiter"], correctIndex: 1 },
@@ -13,7 +13,7 @@ const questionPool = [
     { question: "What is the currency of the UK?", options: ["Euro", "Pound Sterling", "Dollar"], correctIndex: 1 }
 ];
 
-let correctAnswers = {};
+let answerKey = {};
 
 document.addEventListener('DOMContentLoaded', () => {
     loadQuestions();
@@ -27,28 +27,28 @@ function loadQuestions() {
     const form = document.querySelector('form');
     const questionsContainers = form.querySelectorAll('.question');
     
-    const selectedQuestions = shuffleArray([...questionPool]).slice(0, 5);
-    correctAnswers = {};
+    const currentQuestions = shuffleArray([...quizQuestions]).slice(0, 5);
+    answerKey = {};
     
     questionsContainers.forEach((container, index) => {
-        if (index < selectedQuestions.length) {
-            const q = selectedQuestions[index];
-            const questionDiv = container.querySelector('div');
-            questionDiv.textContent = q.question;
-            
-            const qName = `q${index + 1}`;
-            correctAnswers[qName] = q.correctIndex;
-            
-            const radioInputs = container.querySelectorAll('input[type="radio"]');
-            const spans = container.querySelectorAll('span');
-            
-            radioInputs.forEach((input, optIndex) => {
+        if (index < currentQuestions.length) {
+            const q = currentQuestions[index];
+            const questionTextEl = container.querySelector('div');
+            questionTextEl.textContent = q.question;
+
+            const questionId = `q${index + 1}`;
+            answerKey[questionId] = q.correctIndex;
+
+            const optionInputs = container.querySelectorAll('input[type="radio"]');
+            const optionLabels = container.querySelectorAll('span');
+
+            optionInputs.forEach((input, optIndex) => {
                 input.value = q.options[optIndex];
-                input.id = qName;
-                input.name = qName;
+                input.id = questionId;
+                input.name = questionId;
                 input.dataset.optionIndex = optIndex;
-                if (spans[optIndex]) {
-                    spans[optIndex].textContent = q.options[optIndex];
+                if (optionLabels[optIndex]) {
+                    optionLabels[optIndex].textContent = q.options[optIndex];
                 }
             });
         }
@@ -95,18 +95,18 @@ function setupFormValidation() {
 }
 
 function setupSubmit() {
-    const submit = document.getElementById('submit');
-    if (!submit) return;
-    submit.addEventListener('click', () => {
+    const submitBtn = document.getElementById('submit');
+    if (!submitBtn) return;
+    submitBtn.addEventListener('click', () => {
         let score = 0;
         
         for (let i = 1; i <= 5; i++) {
-            const qName = `q${i}`;
-            const checkedRadio = document.querySelector(`input[name="${qName}"]:checked`);
-            
-            if (checkedRadio && correctAnswers[qName] !== undefined) {
-                const selectedIndex = parseInt(checkedRadio.dataset.optionIndex);
-                if (selectedIndex === correctAnswers[qName]) {
+            const questionId = `q${i}`;
+            const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`);
+
+            if (selectedOption && answerKey[questionId] !== undefined) {
+                const selectedOptionIndex = parseInt(selectedOption.dataset.optionIndex);
+                if (selectedOptionIndex === answerKey[questionId]) {
                     score++;
                 }
             }
