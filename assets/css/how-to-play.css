@@ -1,0 +1,184 @@
+/* How to Play Page Specific Styles */
+
+.container {
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before,
+.container::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, rgba(124,58,237,0) 70%);
+    z-index: 0;
+}
+
+.container::before {
+    top: -140px;
+    right: -120px;
+}
+
+.container::after {
+    bottom: -160px;
+    left: -140px;
+    background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, rgba(6,182,212,0) 70%);
+}
+
+.container > * {
+    position: relative;
+    z-index: 1;
+}
+
+.container h1 {
+    text-shadow: 0 6px 20px rgba(124,58,237,0.18);
+}
+
+.container .subtitle {
+    max-width: 520px;
+    margin: 0 auto 34px;
+}
+
+.container .section-title {
+    letter-spacing: 0.02em;
+    position: relative;
+}
+
+.container .section-title::after {
+    content: "";
+    display: block;
+    height: 4px;
+    width: 64px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: var(--primary-gradient);
+}
+
+.container .steps {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.container .step {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(6,182,212,0.08) 100%);
+    box-shadow: 0 12px 26px rgba(15,23,42,0.1);
+}
+
+.container .step::after {
+    content: "";
+    position: absolute;
+    inset: auto -20% -40% -20%;
+    height: 80px;
+    background: linear-gradient(90deg, rgba(124,58,237,0.16), rgba(6,182,212,0.16));
+    opacity: 0.5;
+    transform: translateY(30px);
+    transition: var(--transition);
+}
+
+.container .step:hover::after {
+    transform: translateY(0);
+}
+
+.container .step-number {
+    box-shadow: 0 6px 14px rgba(124,58,237,0.2);
+    background: var(--primary-gradient);
+}
+
+.container .scoring-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 20px;
+    margin: 28px 0 10px;
+}
+
+.container .score-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+    padding: 26px 22px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid rgba(15,23,42,0.08);
+    box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+    transition: var(--transition);
+}
+
+.container .score-card:nth-child(1) {
+    border-top: 4px solid #10b981;
+}
+
+.container .score-card:nth-child(2) {
+    border-top: 4px solid #ef4444;
+}
+
+.container .score-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(15,23,42,0.12);
+}
+
+.container .score-icon {
+    font-size: 2.3em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.container .score-card h4 {
+    font-size: 1.05em;
+    margin-bottom: 6px;
+    color: var(--dark-navy);
+}
+
+.container .score-card p {
+    color: var(--text-gray);
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.container .tips {
+    background: linear-gradient(135deg, rgba(255,244,230,0.95) 0%, rgba(255,248,235,0.95) 100%);
+    border-left: 6px solid #ffb74d;
+    box-shadow: 0 10px 22px rgba(255,152,0,0.12);
+}
+
+.container .tips ul {
+    display: grid;
+    gap: 10px;
+}
+
+.container .tips li {
+    background: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    padding: 10px 12px 10px 34px;
+}
+
+.container .tips li::before {
+    color: #ffb74d;
+}
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    .container .steps { grid-template-columns: 1fr; }
+    .container .scoring-grid { grid-template-columns: 1fr; gap: 15px; }
+    .container .score-card { padding: 20px; }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .container .scoring-grid { gap: 12px; }
+    .container .score-card { padding: 16px; }
+    .container .score-icon { font-size: 2em; }
+    .container .score-card h4 { font-size: 1em; }
+    .container .score-card p { font-size: 1.1em; }
+}
+
+/* Extra Small Devices (375px and below) */
+@media (max-width: 375px) {
+    .container .scoring-grid { gap: 10px; }
+    .container .score-card { padding: 12px; }
+    .container .score-icon { font-size: 1.8em; margin-bottom: 8px; }
+    .container .score-card h4 { font-size: 1em; }
+    .container .score-card p { font-size: 1.1em; }
+}
