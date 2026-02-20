@@ -87,7 +87,6 @@ Below are resources that were helpful during the development of this project:
 - [CSS Modal Tutorial](https://www.youtube.com/results?search_query=css+modal+tutorial)
 
 ### Blog Posts & Tutorials
-- [How to Create a Quiz App](https://www.freecodecamp.org/news/how-to-make-a-quiz-app-using-javascript/)
 - [JavaScript Event Handling Best Practices](https://javascript.info/events)
 - [CSS Flexbox Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
