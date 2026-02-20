@@ -82,7 +82,7 @@ function populateQuestionContainer(container, question, index) {
     
     inputs.forEach((input, i) => {
         input.value = question.options[i];
-        input.id = qId;
+        input.id = `${qId}-option-${i}`;
         input.name = qId;
         input.dataset.optionIndex = i;
         spans[i].textContent = question.options[i];
@@ -148,15 +148,16 @@ function showScorePopup(score) {
     ok.focus();
     
     ok.onclick = () => closeModal(modal);
-    modal.addEventListener('click', e => {
-        if (e.target === modal) closeModal(modal);
-    });
 }
 
 function closeModal(modal) {
     modal.style.display = 'none';
     modal.classList.remove('active');
 }
+
+document.getElementById('score-modal')?.addEventListener('click', e => {
+    if (e.target.id === 'score-modal') closeModal(e.currentTarget);
+});
 
 function setupReset() {
     const btn = document.getElementById('reset');
