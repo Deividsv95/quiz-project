@@ -137,6 +137,61 @@ If you find a bug or have a suggestion, please open an issue with:
 - I did not have a clear vision of what i wanted the finished product to look like 
 - Not being as familiar with VScode and Git, which was a learning curve itself
 
+## Testing
+
+### Code Validation
+
+#### HTML Validation
+- **Validator Used:** W3C HTML Validator
+- **Results:** ✅ Passed with 0 errors
+  
+- **Evidence:** [https://validator.w3.org/nu/?doc=https%3A%2F%2Fdeividsv95.github.io%2Fquiz-project%2F]
+
+#### CSS Validation  
+- **Validator Used:** W3C CSS (Jigsaw) Validator
+- **Results:** ✅ Passed with 0 errors
+
+- **Evidence:** [https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdeividsv95.github.io%2Fquiz-project%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en]
+
+
+### JavaScript Features Used
+- **ES6+ Syntax:** Arrow functions, const/let, template literals, destructuring
+- **Array Methods:** map(), forEach(), slice(), filter, spread operator
+- **DOM Manipulation:** querySelector, createElement, event listeners
+- **Data Structures:** Objects for answer key, arrays for questions
+- **Algorithms:** Fisher-Yates shuffle for randomization
+
+### Key Functions
+- `shuffleArray()` - Implements Fisher-Yates algorithm for unbiased randomization
+- `loadQuestions()` - Selects and randomizes questions from the question bank
+- `calculateScore()` - Compares user answers against correct answers
+- `setupFormValidation()` - Disables submit until all questions answered
+- Modal management functions for user feedback
+
+### Code Organization
+The JavaScript is organized into logical sections:
+1. **Variables** - Question bank and configuration
+2. **Initialization** - DOMContentLoaded setup
+3. **Utility Functions** - Reusable helpers
+4. **Form Validation** - Answer checking
+5. **Events** - User interaction handlers
+
+#### Browser Console Testing
+- ✅ No errors in Chrome DevTools Console
+- ✅ All functions execute without warnings
+
+
+### Device Testing
+Tested on multiple screen sizes:
+- ✅ Desktop (1920x1080) - All features work perfectly
+- ✅ Tablet (768x1024) - Responsive layout works
+- ✅ Mobile (375x667) - Questions and buttons display correctly
+
+### Known Issues
+- None identified during testing
+
+
+
 ## 🌐 Live Demo
 
 Check out the live version: [Quiz Project](https://deividsv95.github.io/quiz-project/)
